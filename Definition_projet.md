@@ -24,3 +24,19 @@ en trois dimensions d'orbites et de cones de distribution de signaux diffusés p
 données de trajectoires sont disponibles à l'adresse : https://data.nasa.gov/browse?q=trajectory%20data&sortBy=relevance
 
 # Demarche :  
+### Visualisation : 
+L'utilisation d'objets de classe *orbite* dont les paramètres seraient connus car issus de données ou demandées à l'utilisateur
+(console ou **YAML**) peut permettre de rassembler les données définissant une trajectoire autour d'un astre.
+Les fonctions d'affichage ``orbit_plotter()`` devraient pouvoir afficher les orbites associées (en deux dimensions dans
+un premier temps) 
+### Importation de données :
+Des données issues de la NASA, de l'ESA ou de toute autre source fiable peuvent être importées, soit à travers des requêtes
+soit manuellement. Elles seront traitées et filtrées afin de permettre leur exploitation par la partie **Visualisation**.
+
+### Traitement :
+Le calcul de caractéristiques de trajectoire peut être réalisé à la demande de l'utilisateur selon des critères qu'il défini ou désire obtenir (périgée, apogée, vitesse etc...).  
+Le calcul de manoeuvre doit être réalisé à partir d'un objectif défini (altitude, excentricité, inclinaison etc...). Il
+doit permettre de définir le nombre de manoeuvres, l'orientation du (ou des) changements de vitesse, leur position sur
+les différentes orbites de transfert, le temps estimé de manoeuvre et la quantité de Delta V nécessaire au succès de la mission.  
+Les calculs réalisés s'appuieront sur les lois de Kepler ainsi que les lois usuelles de mécanique orbitale (2 bodies problem, 3 bodies problem etc...)
+dont la résolution pourra s'appuyer sur des bibliothèques comme NumPy ou SciPy.
