@@ -1,4 +1,4 @@
-from classes import *
+from objet_orbite import *
 
 terre = Planet(6000, 3000)
 mars = Planet(2000, 2000, color='r')

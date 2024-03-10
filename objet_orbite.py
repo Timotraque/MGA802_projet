@@ -116,10 +116,10 @@ class Atmosphere:
         return densites_air
 
     def calculer_temperature(self, annee=2023, mois=4, jour=1, heure=0.0):
-        fichier_f10_7 = pd.read_excel('../flux_solaire_data.xlsx')
+        fichier_f10_7 = pd.read_excel('./flux_solaire_data.xlsx')
         f_10_7 = float(fichier_f10_7[(fichier_f10_7['Année'] == annee) & (fichier_f10_7['Mois'] == mois)]['Flux ajusté'])   # [W.m-2.Hz-1]
 
-        fichier_Ap = pd.read_excel('../geomagnetic_data_gfz.xlsx')
+        fichier_Ap = pd.read_excel('./geomagnetic_data_gfz.xlsx')
         Ap = float(fichier_Ap[(fichier_Ap['year'] == annee) & (fichier_Ap['month'] == mois) & (fichier_Ap['day']==jour) & (fichier_Ap['hour_h']==heure)]['ap'])
 
         T = 900 + 2.5 * (f_10_7 - 70) + 1.5 * Ap    # [K]
