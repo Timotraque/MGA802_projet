@@ -1,3 +1,5 @@
+import pdb
+
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -5,7 +7,7 @@ from matplotlib.patches import Circle
 from mpl_toolkits.mplot3d import art3d
 from constantes import *
 import pandas as pd
-
+import math
 
 class SpaceBody():
 
@@ -73,7 +75,7 @@ class Atmosphere:
 
     def calculer_densite_air(self, altitude):
 
-        if altitude < 180000:
+        if altitude < 100000:
             # Constantes de l'atmosphère standard
             p0 = 101325  # Pression atmosphérique au niveau de la mer en Pa
             T0 = 288.15  # Température au niveau de la mer en K
@@ -86,26 +88,28 @@ class Atmosphere:
             T = T0 - L * altitude
 
             # Calcul de la pression à l'altitude donnée
-            p = p0 * ((1 - (L * altitude) / T0) ** (g * M / (R * L)))
+            p = p0 * np.float_power((1 - ((L * altitude) / T0)), g * M / (R * L))
+
 
             # Calcul de la densité de l'air à l'altitude donnée
             rho = p * M / (R * T)
+            rho = rho.item()
 
-        elif altitude >= 180000:
+
+        elif altitude >= 100000:
             m = 27 - 0.012 * ((altitude / 1000) - 200)
 
             # En utilisant la temperature en très haute atmosphère
-            H = self.temperature / m           # [km]
+            H = self.temperature / m   # [km]
 
-            rho = 6 * (1/np.power(10, 10)) * np.exp(-((altitude / 1000) - 175) / H)       # [kg / m3]
+            rho = 6 * (1 / np.power(10, 10)) * np.exp(-((altitude / 1000) - 175) / H)       # [kg / m3]
+            rho = rho.item()
 
-        if type(rho) != float:
-            import pdb; pdb.set_trace()
         return rho
 
     def calculer_densites(self):
         altitude_max = 1000000  # 1000 km en mètres
-        intervalle = 100  # Intervalle en mètres
+        intervalle = 1000  # Intervalle en mètres
         densites_air = [self.calculer_densite_air(altitude) for altitude in
                         range(0, altitude_max + intervalle, intervalle)]
 
@@ -245,61 +249,79 @@ class Orbite():
         nouvelle_orbite = Orbite(r_perigee, r_apogee, self.inclinaison)
         return nouvelle_orbite
 
-    def desorbitation(self, satellite, orbite, position, atmosphere, force_propulsion=0):
+    def desorbitation(self, satellite, orbite, position, atmosphere, plot_orbit=False, force_propulsion=0):
         # Calcul et affichage de la trajectoire du satellite en orbite
 
         # Initialisation des variables
-        temps = np.linspace(0, self.temps_simu, 10000)
-        altitude = np.zeros_like(temps)
-        vitesse = np.zeros_like(temps)
-        acceleration_radiale = np.zeros_like(temps)
-        acceleration_tangentielle = np.zeros_like(temps)
-        acceleration = np.zeros_like(temps)
+        temps = []
+        altitude = []
+        vitesse = []
+        acceleration_radiale = []
+        acceleration_tangentielle = []
+        acceleration = []
 
-        # Conditions initiales
+        # Conditions de position initiales
         match position:
             case Position_manoeuvre.perigee:
-                altitude[0] = self.perigee
-
+                altitude.append(self.perigee)
             case Position_manoeuvre.apogee:
-                altitude[0] = self.apogee
+                altitude.append(self.perigee)
 
-        vitesse[0] = np.sqrt(mu_terre / altitude[0])
-
+        vitesse.append(np.sqrt(mu_terre / altitude[0]))
+        temps.append(0)
         # Calcul de la trajectoire avec la méthode d'Euler
-        for i in range(1, len(temps)):
+
+        i = 0
+        # Tant que le satellite n'atteint pas 100 km
+        while altitude[i] > 100000:
 
             # Force gravitationnelle et de trainee
-            force_gravite = -mu_terre / altitude[i - 1] ** 2
-            densite_air = atmosphere.densite[int(altitude[i-1] // 100)]
-            force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i-1], 2) * satellite.cx
+            force_gravite = -mu_terre / (altitude[i] ** 2)
+            densite_air = atmosphere.densite[int(altitude[i])//1000]
+            force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i], 2) * satellite.cx
 
             # Calcul des composantes radiales et tangentielle des forces
             force_radiale = force_gravite
             force_tangentielle = force_propulsion + force_trainee
 
             # Calcul de l'accélération radiale et tangentielle
-            acceleration_radiale[i] = force_radiale / satellite.mass
-            acceleration_tangentielle[i] = force_tangentielle / satellite.mass
+            acceleration_radiale.append(force_radiale / satellite.mass)
+            acceleration_tangentielle.append(force_tangentielle / satellite.mass)
 
-            # Accélération=(somme des forces / masse), ne prends pas en compte la difference de masse au cours de la manoeuvre
-            acceleration[i] = (force_gravite + force_propulsion) / satellite.mass
+            # Accélération = (somme des forces / masse), ne prends pas en compte la difference
+            # de masse au cours de la manoeuvre
+            acceleration.append((force_gravite + force_propulsion) / satellite.mass)
 
-            # Mise à jour de la vitesse et de l'altitude avec la méthode d'Euler
-            vitesse[i] = vitesse[i - 1] + acceleration_tangentielle[i] * self.dt
-            altitude[i] = mu_terre / vitesse[i]**2
+            # Mise à jour de la vitesse et de l'altitude
+            vitesse.append((vitesse[i] + acceleration_tangentielle[i] * self.dt))
+            altitude.append(mu_terre / vitesse[i]**2)
+            temps.append(temps[i] + self.dt)
+            i += 1
+
+
+
+        # Affichage des trajectoires
+        jour = []
+        for j in range(len(temps)):
+            jour.append(temps[j] / (24 * 3600))
 
         fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-        ax.plot(altitude * np.cos(temps), altitude * np.sin(temps), np.zeros_like(temps), label='Trajectoire du satellite')
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
-        ax.set_title('Trajectoire du satellite en orbite')
-        plt.legend()
+        ax = fig.add_subplot()
+        ax.set_title('Altitude en fonction du temps')
+        ax.set_xlabel('Temps [J]')
+        ax.set_ylabel('Altitude [m]')
+        ax.set_title('Altitude du satellite')
+        plt.title('Altitude du satellite')
+        plt.plot(jour, altitude)
         plt.show()
 
-        fig2 = plt.figure()
-        plt.plot(temps, altitude)
-        plt.show()
-        import pdb; pdb.set_trace()
+        if plot_orbit :
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.plot(altitude * np.cos(temps), altitude * np.sin(temps), np.zeros_like(temps), label='Trajectoire du satellite')
+            ax.set_xlabel('X')
+            ax.set_ylabel('Y')
+            ax.set_zlabel('Z')
+            ax.set_title('Trajectoire du satellite en orbite')
+            plt.legend()
+            plt.show()
