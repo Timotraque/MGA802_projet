@@ -74,7 +74,7 @@ class Atmosphere:
         self.densite = self.calculer_densites()
 
     def calculer_densite_air(self, altitude):
-
+        altitude = altitude - rayon_terre
         if altitude < 100000:
             # Constantes de l'atmosphère standard
             p0 = 101325  # Pression atmosphérique au niveau de la mer en Pa
@@ -108,7 +108,7 @@ class Atmosphere:
         return rho
 
     def calculer_densites(self):
-        altitude_max = 1000000  # 1000 km en mètres
+        altitude_max = int(1000000)  # 1000 km en mètres
         intervalle = 1000  # Intervalle en mètres
         densites_air = [self.calculer_densite_air(altitude) for altitude in
                         range(0, altitude_max + intervalle, intervalle)]
@@ -263,9 +263,9 @@ class Orbite():
         # Conditions de position initiales
         match position:
             case Position_manoeuvre.perigee:
-                altitude.append(self.perigee)
+                altitude.append(self.perigee + rayon_terre)
             case Position_manoeuvre.apogee:
-                altitude.append(self.perigee)
+                altitude.append(self.perigee + rayon_terre)
 
         vitesse.append(np.sqrt(mu_terre / altitude[0]))
         temps.append(0)
@@ -277,6 +277,7 @@ class Orbite():
 
             # Force gravitationnelle et de trainee
             force_gravite = -mu_terre / (altitude[i] ** 2)
+            import pdb; pdb.set_trace()
             densite_air = atmosphere.densite[int(altitude[i])//1000]
             force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i], 2) * satellite.cx
 
