@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import Circle
 from mpl_toolkits.mplot3d import art3d
-from constantes import *
+from .constantes import *
 
 
 class Two_body_problem():
