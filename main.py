@@ -12,7 +12,7 @@ orbite_initiale = Orbite(perigee, apogee, inclinaison, )
 # ---------------------Manoeuvre orbitale---------------------
 delta_v = 1000  # Changement de vitesse en m/s
 direction = Type_manoeuvre.prograde  # Direction de la manoeuvre ('prograde', 'retrograde' ou 'radiale')
-position_manoeuvre = Position_manoeuvre.perigee  # Position de la manoeuvre ('perigee' ou 'apogee')
+position_manoeuvre = Position_manoeuvre.apogee  # Position de la manoeuvre ('perigee' ou 'apogee')
 
 
 nouvelle_orbite = orbite_initiale.manoeuvre(delta_v, direction, position_manoeuvre)

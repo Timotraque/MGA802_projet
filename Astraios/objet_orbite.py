@@ -43,7 +43,7 @@ class Two_body_problem():
 
 class Orbite():
 
-    def __init__(self, perigee, apogee, inclinaison=0, dt=1000, temps_simu=800000):
+    def __init__(self, perigee, apogee, inclinaison=0, dt=100, temps_simu=800000):
         if perigee <= apogee:
             self.perigee = perigee
             self.apogee = apogee
@@ -183,7 +183,7 @@ class Orbite():
                 altitude.append(self.apogee + rayon_terre)
 
         #vitesse.append(np.sqrt(mu_terre / altitude[0]))
-        vitesse.append(np.sqrt(mu_terre * ((1 / altitude[0]) - 1 / orbite.a)))
+        vitesse.append(np.sqrt(mu_terre * ((2 / altitude[0]) - 1 / orbite.a)))
         temps.append(0)
 
         i = 0
@@ -193,6 +193,10 @@ class Orbite():
 
             # Force gravitationnelle et de trainee
             force_gravite = -mu_terre / (altitude[i] ** 2)
+
+            if int(altitude[i] - rayon_terre)//1000 > len(atmosphere.densite):
+                import pdb; pdb.set_trace()
+
             densite_air = atmosphere.densite[int(altitude[i] - rayon_terre)//1000]
             force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i], 2) * satellite.cx
 
@@ -210,10 +214,12 @@ class Orbite():
 
             # Mise à jour de la vitesse et de l'altitude
             vitesse.append((vitesse[i] + acceleration_tangentielle[i] * self.dt))
-            #altitude.append(mu_terre / vitesse[i]**2)
-            altitude.append((2 * mu_terre * orbite.a) / (mu_terre + orbite.a * vitesse[i]**2))
+
+            #altitude.append(np.sqrt(mu_terre / vitesse[i]**2))
+            altitude.append((2 * mu_terre * orbite.a) / (orbite.a * np.power(vitesse[i], 2) + mu_terre))
             temps.append(temps[i] + self.dt)
             i += 1
+
 
         # Affichage des trajectoires
         jour = []
@@ -229,6 +235,7 @@ class Orbite():
         ax.set_title('Altitude du satellite')
         plt.title('Altitude du satellite')
         plt.plot(jour, alt)
+        plt.grid()
         plt.show()
 
         if plot_orbit :
