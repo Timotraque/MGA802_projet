@@ -45,3 +45,8 @@ doit permettre de définir le nombre de manoeuvres, l'orientation du (ou des) ch
 les différentes orbites de transfert, le temps estimé de manoeuvre et la quantité de Delta V nécessaire au succès de la mission.  
 Les calculs réalisés s'appuieront sur les lois de Kepler ainsi que les lois usuelles de mécanique orbitale (2 bodies problem, 3 bodies problem etc...)
 dont la résolution pourra s'appuyer sur des bibliothèques comme NumPy ou SciPy.
+
+# Bibliographie :
+
+https://kp.gfz-potsdam.de/en/data#c222
+
