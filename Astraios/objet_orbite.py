@@ -1,36 +1,10 @@
-import pdb
-
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.patches import Circle
 from mpl_toolkits.mplot3d import art3d
-from constantes import *
-import pandas as pd
-import math
+from .constantes import *
 
-class SpaceBody():
-
-    """Define a body enrolled in an orbit,
-    it can be a planet, a star, a satellite or any kind of artificial or natural element
-    """
-    def __init__(self, mass=0):
-        self.mass = mass
-
-
-class Planet(SpaceBody):
-
-    def __init__(self,mass, radius=0,color='b'):
-        super().__init__(mass)
-        self.radius = radius    # [m]
-        self.color = color
-
-
-class Satellite(SpaceBody):
-    def __init__(self, mass, surface, cx=2):
-        super().__init__(mass)
-        self.cx = cx                # [sans dimension]
-        self.surface = surface      # [m²]
 
 class Two_body_problem():
 
@@ -67,68 +41,9 @@ class Two_body_problem():
         plt.show()
         #import pdb; pdb.set_trace()
 
-
-class Atmosphere:
-    def __init__(self):
-        self.temperature = self.calculer_temperature()
-        self.densite = self.calculer_densites()
-
-    def calculer_densite_air(self, altitude):
-        altitude = altitude - rayon_terre
-        if altitude < 100000:
-            # Constantes de l'atmosphère standard
-            p0 = 101325  # Pression atmosphérique au niveau de la mer en Pa
-            T0 = 288.15  # Température au niveau de la mer en K
-            L = 0.0065  # Variation de température avec l'altitude en K/m
-            R = 8.31447  # Constante des gaz parfaits en J/(mol*K)
-            M = 0.0289644  # Masse molaire de l'air en kg/mol
-            g = 9.80665  # Accélération gravitationnelle en m/s^2
-
-            # Calcul de la température à l'altitude donnée
-            T = T0 - L * altitude
-
-            # Calcul de la pression à l'altitude donnée
-            p = p0 * np.float_power((1 - ((L * altitude) / T0)), g * M / (R * L))
-
-
-            # Calcul de la densité de l'air à l'altitude donnée
-            rho = p * M / (R * T)
-            rho = rho.item()
-
-
-        elif altitude >= 100000:
-            m = 27 - 0.012 * ((altitude / 1000) - 200)
-
-            # En utilisant la temperature en très haute atmosphère
-            H = self.temperature / m   # [km]
-
-            rho = 6 * (1 / np.power(10, 10)) * np.exp(-((altitude / 1000) - 175) / H)       # [kg / m3]
-            rho = rho.item()
-
-        return rho
-
-    def calculer_densites(self):
-        altitude_max = int(1000000)  # 1000 km en mètres
-        intervalle = 1000  # Intervalle en mètres
-        densites_air = [self.calculer_densite_air(altitude) for altitude in
-                        range(0, altitude_max + intervalle, intervalle)]
-
-        return densites_air
-
-    def calculer_temperature(self, annee=2023, mois=4, jour=1, heure=0.0):
-        fichier_f10_7 = pd.read_excel('./flux_solaire_data.xlsx')
-        f_10_7 = float(fichier_f10_7[(fichier_f10_7['Année'] == annee) & (fichier_f10_7['Mois'] == mois)]['Flux ajusté'])   # [W.m-2.Hz-1]
-
-        fichier_Ap = pd.read_excel('./geomagnetic_data_gfz.xlsx')
-        Ap = float(fichier_Ap[(fichier_Ap['year'] == annee) & (fichier_Ap['month'] == mois) & (fichier_Ap['day']==jour) & (fichier_Ap['hour_h']==heure)]['ap'])
-
-        T = 900 + 2.5 * (f_10_7 - 70) + 1.5 * Ap    # [K]
-
-        return T
-
 class Orbite():
 
-    def __init__(self, perigee, apogee, inclinaison=0, dt=10, temps_simu=800000):
+    def __init__(self, perigee, apogee, inclinaison=0, dt=100, temps_simu=800000):
         if perigee <= apogee:
             self.perigee = perigee
             self.apogee = apogee
@@ -265,20 +180,24 @@ class Orbite():
             case Position_manoeuvre.perigee:
                 altitude.append(self.perigee + rayon_terre)
             case Position_manoeuvre.apogee:
-                altitude.append(self.perigee + rayon_terre)
+                altitude.append(self.apogee + rayon_terre)
 
-        vitesse.append(np.sqrt(mu_terre / altitude[0]))
+        #vitesse.append(np.sqrt(mu_terre / altitude[0]))
+        vitesse.append(np.sqrt(mu_terre * ((2 / altitude[0]) - 1 / orbite.a)))
         temps.append(0)
-        # Calcul de la trajectoire avec la méthode d'Euler
 
         i = 0
+
         # Tant que le satellite n'atteint pas 100 km
-        while altitude[i] > 100000:
+        while altitude[i] > (100000 + rayon_terre):
 
             # Force gravitationnelle et de trainee
             force_gravite = -mu_terre / (altitude[i] ** 2)
-            import pdb; pdb.set_trace()
-            densite_air = atmosphere.densite[int(altitude[i])//1000]
+
+            if int(altitude[i] - rayon_terre)//1000 > len(atmosphere.densite):
+                import pdb; pdb.set_trace()
+
+            densite_air = atmosphere.densite[int(altitude[i] - rayon_terre)//1000]
             force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i], 2) * satellite.cx
 
             # Calcul des composantes radiales et tangentielle des forces
@@ -295,17 +214,19 @@ class Orbite():
 
             # Mise à jour de la vitesse et de l'altitude
             vitesse.append((vitesse[i] + acceleration_tangentielle[i] * self.dt))
-            altitude.append(mu_terre / vitesse[i]**2)
+
+            #altitude.append(np.sqrt(mu_terre / vitesse[i]**2))
+            altitude.append((2 * mu_terre * orbite.a) / (orbite.a * np.power(vitesse[i], 2) + mu_terre))
             temps.append(temps[i] + self.dt)
             i += 1
 
 
-
         # Affichage des trajectoires
         jour = []
+        alt = []
         for j in range(len(temps)):
             jour.append(temps[j] / (24 * 3600))
-
+            alt.append(altitude[j] - rayon_terre)
         fig = plt.figure()
         ax = fig.add_subplot()
         ax.set_title('Altitude en fonction du temps')
@@ -313,7 +234,8 @@ class Orbite():
         ax.set_ylabel('Altitude [m]')
         ax.set_title('Altitude du satellite')
         plt.title('Altitude du satellite')
-        plt.plot(jour, altitude)
+        plt.plot(jour, alt)
+        plt.grid()
         plt.show()
 
         if plot_orbit :
