@@ -215,8 +215,6 @@ class Orbite():
             temps.append(temps[i] + self.dt)
             i += 1
 
-
-
         # Affichage des trajectoires
         jour = []
         alt = []

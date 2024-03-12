@@ -1,7 +1,5 @@
-from objet_orbite import *
+from Astraios import *
 import time
-from objet_SPaceBody import Planet, Satellite
-from objet_Atmopshere import Atmosphere
 
 # Exemple d'utilisation
 perigee = 200 * 10**3   # Altitude du périgée [m]
