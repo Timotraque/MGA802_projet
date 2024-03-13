@@ -41,9 +41,10 @@ class Two_body_problem():
         plt.show()
         #import pdb; pdb.set_trace()
 
+
 class Orbite():
 
-    def __init__(self, perigee, apogee, inclinaison=0, dt=100, temps_simu=800000):
+    def __init__(self, perigee, apogee, inclinaison=0, dt=1000, temps_simu=800000):
         if perigee <= apogee:
             self.perigee = perigee
             self.apogee = apogee
@@ -248,3 +249,5 @@ class Orbite():
             ax.set_title('Trajectoire du satellite en orbite')
             plt.legend()
             plt.show()
+
+        return jour[len(jour)-1]
