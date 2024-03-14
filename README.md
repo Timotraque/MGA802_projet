@@ -1,7 +1,29 @@
-# MGA802_projet : 
+# Astraios : Python deorbit computing
 
-Ce dépot GitHub conttient une librairie permettant de modéliser la trajectoire de satellites ainsi que les manoeuvres spatiales pouvant être réalisées en s'appuyant sur les équations de mécanique orbitale.  
-Un fichier main.py contient un exemple d'utilisation tandis que le fichier classe_orbite renferme les outils nécessaires.
+Astraios est une bibliothèque Python conçue pour faciliter le calcul d'orbites et la simulation de la désorbitation de satellites en orbite autour de la Terre. Cette bibliothèque fournit des fonctionnalités pour la modélisation des orbites elliptiques, la réalisation de manoeuvres orbitales, le calcul des paramètres d'orbite et la simulation de la désorbitation de satellites.
+
+## Installation
+
+Vous pouvez installer Astraios en utilisant pip. Assurez-vous d'avoir Python d'installé.
+
+
+```pip install Astraios```
+
+## Dépendances
+
+Astraios a besoin des bibliothèques suivantes :
+
+- pandas
+- matplotlib
+- openpyxl
+
+Elles peuvent être installées automatiquement à l'aide de la commande :  
+``pip install -r requirements.txt``
+
+## Utilisation
+Un exemple d'utilisation est fourni dans le fichier main.py. Il permet de créer une orbite, de l'afficher et 
+d'effectuer des manoeuvres orbitales. En définissant les paramètres d'un satellite, il est également possible de calculer
+sa durée de vie en orbite.
 
 ### Definition du projet de MGA802
 
