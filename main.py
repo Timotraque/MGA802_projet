@@ -8,7 +8,7 @@ perigee = 200 * 10**3   # Altitude du périgée [m]
 apogee = 600 * 10**3    # Altitude de l'apogée [m]
 inclinaison = 0         # Inclinaison de l'orbite [°]
 
-orbite_initiale = Orbite(perigee, apogee, inclinaison, )
+orbite_initiale = Orbite(perigee, apogee, inclinaison )
 
 
 # ---------------------Manoeuvre orbitale---------------------
@@ -18,7 +18,7 @@ position_manoeuvre = Position_manoeuvre.apogee  # Position de la manoeuvre ('per
 
 
 nouvelle_orbite = orbite_initiale.manoeuvre(delta_v, direction, position_manoeuvre)
-#nouvelle_orbite.plot_orbit()
+nouvelle_orbite.plot_orbit()
 #-----------------------Desorbitation------------------------
 spoutnik = Satellite(100, 0.5, 2)
 atmosphere_terrestre = Atmosphere()
