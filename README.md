@@ -95,4 +95,3 @@ Cette méthode fait appel à la méthode calculer_densite_air() pour remplir un 
 [1] John Kennewell, “Satellite orbital decay calculations”, Australian Space Weather Agency, 1999  
 [2] Gouv. Canada, “Flux radio du soleil – graphe des moyennes mensuelles”, 2021, disponible sur : https://www.spaceweather.gc.ca/forecast-prevision/solar-solaire/solarflux/sx-6-mavg-fr.php  
 [3] J. Matzka, C. Stolle, Y. Yamazaki, O. Bronkalla et A. Moschhauser, «The geomatgnetic Kp index and derivated indices of geomagnetic activity,» [En ligne]. 
-

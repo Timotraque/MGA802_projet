@@ -5,28 +5,43 @@ from mpl_toolkits.mplot3d import art3d
 from .constantes import *
 
 
-class Two_body_problem():
+
+class Two_body_problem:
+    """
+    Représente un problème à deux corps impliquant deux corps célestes.
+    """
 
     def __init__(self, corps_a, corps_b, rayon=0, excent=0):
+        """
+        Initialise le problème à deux corps avec les paramètres donnés.
+
+        Args:
+        - corps_a : Objet représentant le premier corps céleste.
+        - corps_b : Objet représentant le deuxième corps céleste.
+        - rayon : Paramètre de rayon pour la visualisation de l'orbite (par défaut 0).
+        - excent : Paramètre d'excentricité pour la visualisation de l'orbite (par défaut 0).
+        """
         self.corps_a = corps_a
         self.corps_b = corps_b
         self.rayon = rayon
         self.excent = excent
 
     def show(self):
-
-        # Position centrée de la planete dans le plan orbital
+        """
+        Visualise le problème à deux corps en traçant les corps célestes et leurs orbites.
+        """
+        # Position centrée de la planète dans le plan orbital
         position_planete_a = (0, 0)
         position_planete_b = (0, self.rayon)
-        # Creation de la figure
+        # Création de la figure
         fig, ax = plt.subplots()
 
-        # Cercle de la planete
+        # Cercle représentant la planète
         cercle_planete_a = plt.Circle(position_planete_a, self.corps_a.radius, color=self.corps_a.color)
-        cercle_orbite = plt.Circle(position_planete_a, self.rayon, color='k',fill=False)
+        cercle_orbite = plt.Circle(position_planete_a, self.rayon, color='k', fill=False)
         cercle_planete_b = plt.Circle(position_planete_b, self.corps_b.radius, color=self.corps_b.color)
-        # Ajout de la planete sur la figure
 
+        # Ajout de la planète à la figure
         ax.add_patch(cercle_orbite)
         ax.add_patch(cercle_planete_a)
         ax.add_patch(cercle_planete_b)
@@ -34,16 +49,26 @@ class Two_body_problem():
         plt.xlim(xmin=-2 * self.rayon, xmax=2 * self.rayon)
         plt.ylim(ymin=-2 * self.rayon, ymax=2 * self.rayon)
 
-
-
         ax.axis("equal")
         plt.show()
-        #import pdb; pdb.set_trace()
 
 
-class Orbite():
+class Orbite:
+    """
+    Représente un chemin orbital d'un corps céleste.
+    """
 
     def __init__(self, perigee, apogee, inclinaison=0, dt=1000, temps_simu=800000):
+        """
+        Initialise l'Orbite avec les paramètres donnés.
+
+        Args:
+        - perigee : Altitude du périgée en mètres.
+        - apogee : Altitude de l'apogée en mètres.
+        - inclinaison : Inclinaison orbitale en degrés (par défaut 0).
+        - dt : Intervalle de temps pour la simulation en secondes (par défaut 1000).
+        - temps_simu : Durée de la simulation en secondes (par défaut 800000).
+        """
         if perigee <= apogee:
             self.perigee = perigee
             self.apogee = apogee
@@ -52,7 +77,6 @@ class Orbite():
             self.temps_simu = temps_simu
             self.erreur = False
             self.a = (perigee + apogee + 2 * rayon_terre) / 2       # [m] demi grand-axe
-
         else:
             print("Echec, l'altitude de périgée doit être inférieure à l'apogée")
             self.erreur = True
@@ -165,7 +189,20 @@ class Orbite():
         return nouvelle_orbite
 
     def desorbitation(self, satellite, orbite, position, atmosphere, plot_orbit=False, force_propulsion=0):
-        # Calcul et affichage de la trajectoire du satellite en orbite
+        """
+           Calcule et affiche la trajectoire du satellite en orbite.
+
+           Args:
+           - satellite : Objet Satellite représentant le satellite en orbite.
+           - orbite : Objet Orbite représentant l'orbite du satellite.
+           - position : Position initiale de la trajectoire (perigee ou apogee).
+           - atmosphere : Objet Atmosphere contenant les données atmosphériques.
+           - plot_orbit : Booléen indiquant s'il faut afficher la trajectoire en 3D (par défaut False).
+           - force_propulsion : Force de propulsion pour la désorbitation (par défaut 0).
+
+           Returns:
+           - temps_final : Temps écoulé jusqu'à la fin de la désorbitation (en jours).
+           """
 
         # Initialisation des variables
         temps = []
@@ -182,7 +219,7 @@ class Orbite():
             case Position_manoeuvre.apogee:
                 altitude.append(self.apogee + rayon_terre)
 
-        #vitesse.append(np.sqrt(mu_terre / altitude[0]))
+        # Conditions de vitesse initiale
         vitesse.append(np.sqrt(mu_terre * ((2 / altitude[0]) - 1 / orbite.a)))
         temps.append(0)
 
@@ -194,9 +231,7 @@ class Orbite():
             # Force gravitationnelle et de trainee
             force_gravite = -mu_terre / (altitude[i] ** 2)
 
-            if int(altitude[i] - rayon_terre)//1000 > len(atmosphere.densite):
-                import pdb; pdb.set_trace()
-
+            # Calcul de la force de trainée
             densite_air = atmosphere.densite[int(altitude[i] - rayon_terre)//1000]
             force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i], 2) * satellite.cx
 
@@ -214,12 +249,9 @@ class Orbite():
 
             # Mise à jour de la vitesse et de l'altitude
             vitesse.append((vitesse[i] + acceleration_tangentielle[i] * self.dt))
-
-            #altitude.append(np.sqrt(mu_terre / vitesse[i]**2))
             altitude.append((2 * mu_terre * orbite.a) / (orbite.a * np.power(vitesse[i], 2) + mu_terre))
             temps.append(temps[i] + self.dt)
             i += 1
-
 
         # Affichage des trajectoires
         jour = []

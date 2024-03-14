@@ -2,12 +2,34 @@ import pandas as pd
 import numpy as np
 
 class Atmosphere:
+    """
+    Classe représentant les propriétés de l'atmosphère terrestre.
+
+    Attributes:
+    - temperature : Température de l'atmosphère terrestre (en Kelvin).
+    - densite : Liste des densités de l'air à différentes altitudes (en kg/m^3).
+    """
+
     def __init__(self):
+        """
+        Initialise une instance de la classe Atmosphere.
+
+        - Calcul de la température de l'atmosphère.
+        - Calcul des densités d'air à différentes altitudes.
+        """
         self.temperature = self.calculer_temperature()
         self.densite = self.calculer_densites()
 
     def calculer_densite_air(self, altitude):
+        """
+        Calcule la densité de l'air à une altitude donnée.
 
+        Args:
+        - altitude : Altitude à laquelle calculer la densité (en mètres).
+
+        Returns:
+        - rho : Densité de l'air à l'altitude donnée (en kg/m^3).
+        """
         if altitude < 100000:
             # Constantes de l'atmosphère standard
             p0 = 101325  # Pression atmosphérique au niveau de la mer en Pa
@@ -23,16 +45,14 @@ class Atmosphere:
             # Calcul de la pression à l'altitude donnée
             p = p0 * np.float_power((1 - ((L * altitude) / T0)), g * M / (R * L))
 
-
             # Calcul de la densité de l'air à l'altitude donnée
             rho = p * M / (R * T)
             rho = rho.item()
 
-
         elif altitude >= 100000:
             m = 27 - 0.012 * ((altitude / 1000) - 200)
 
-            # En utilisant la temperature en très haute atmosphère
+            # En utilisant la température en très haute atmosphère
             H = self.temperature / m   # [km]
 
             rho = 6 * (1 / np.power(10, 10)) * np.exp(-((altitude / 1000) - 175) / H)       # [kg / m3]
@@ -41,6 +61,12 @@ class Atmosphere:
         return rho
 
     def calculer_densites(self):
+        """
+        Calcule les densités de l'air à différentes altitudes.
+
+        Returns:
+        - densites_air : Liste des densités de l'air à différentes altitudes (en kg/m^3).
+        """
         altitude_max = int(1000000)  # 1000 km en mètres
         intervalle = 1000  # Intervalle en mètres
         densites_air = [self.calculer_densite_air(altitude) for altitude in
@@ -49,7 +75,18 @@ class Atmosphere:
         return densites_air
 
     def calculer_temperature(self, annee=2023, mois=4, jour=1, heure=0.0):
+        """
+        Calcule la température de l'atmosphère terrestre.
 
+        Args:
+        - annee : Année pour laquelle calculer la température (par défaut 2023).
+        - mois : Mois pour lequel calculer la température (par défaut 4).
+        - jour : Jour pour lequel calculer la température (par défaut 1).
+        - heure : Heure du jour pour laquelle calculer la température (par défaut 0.0).
+
+        Returns:
+        - T : Température de l'atmosphère terrestre (en Kelvin).
+        """
         fichier_f10_7 = pd.read_excel('data/flux_solaire_data.xlsx')
         f_10_7 = float(fichier_f10_7[(fichier_f10_7['Année'] == annee) & (fichier_f10_7['Mois'] == mois)]['Flux ajusté'])   # [W.m-2.Hz-1]
 
