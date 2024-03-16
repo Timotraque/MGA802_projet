@@ -7,7 +7,7 @@ Toute la documentation nécessaire à l'utilisation d'Astraios est disponible da
 d'ouvrir le fichier `index.html` du dossier dans `docs/_build/html`.
 ## Installation 
 
-Vous pouvez installer Astraios en utilisant pip. Assurez-vous d'avoir Python d'installé.
+Vous pouvez installer Astraios en utilisant pip. Assurez-vous d'avoir Python 3.12 d'installé.
 
 ```pip install https://github.com/Timotraque/MGA802_projet```
 
