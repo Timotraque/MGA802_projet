@@ -2,6 +2,9 @@
 
 Astraios est une bibliothèque Python conçue pour faciliter le calcul d'orbites et la simulation de la désorbitation de satellites en orbite autour de la Terre. Cette bibliothèque fournit des fonctionnalités pour la modélisation des orbites elliptiques, la réalisation de manoeuvres orbitales, le calcul des paramètres d'orbite et la simulation de la désorbitation de satellites.
 
+## Documentation
+Toute la documentation nécessaire à l'utilisation d'Astraios [astrajɔs] est disponible dans l'onglet `docs` de ce repo GitHub.
+d'ouvrir le fichier `index.html` du dossier dans `docs/_build/html`.
 ## Installation 
 
 Vous pouvez installer Astraios en utilisant pip. Assurez-vous d'avoir Python d'installé.
