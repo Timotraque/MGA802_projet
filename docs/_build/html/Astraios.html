@@ -21,7 +21,6 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="main module" href="main.html" />
     <link rel="prev" title="MGA802_projet" href="modules.html" /> 
 </head>
 
@@ -49,14 +48,29 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">MGA802_projet</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Astraios package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#astraios-constantes-module">Astraios.constantes module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#astraios-objet-atmopshere-module">Astraios.objet_Atmopshere module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#astraios-objet-spacebody-module">Astraios.objet_SpaceBody module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#astraios-objet-orbite-module">Astraios.objet_orbite module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Astraios.constantes">Astraios.constantes module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.constantes.Position_manoeuvre"><code class="docutils literal notranslate"><span class="pre">Position_manoeuvre</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.constantes.Type_manoeuvre"><code class="docutils literal notranslate"><span class="pre">Type_manoeuvre</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Astraios.objet_Atmopshere">Astraios.objet_Atmopshere module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.objet_Atmopshere.Atmosphere"><code class="docutils literal notranslate"><span class="pre">Atmosphere</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Astraios.objet_SpaceBody">Astraios.objet_SpaceBody module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.objet_SpaceBody.Planet"><code class="docutils literal notranslate"><span class="pre">Planet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.objet_SpaceBody.Satellite"><code class="docutils literal notranslate"><span class="pre">Satellite</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.objet_SpaceBody.SpaceBody"><code class="docutils literal notranslate"><span class="pre">SpaceBody</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Astraios.objet_orbite">Astraios.objet_orbite module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.objet_orbite.Orbite"><code class="docutils literal notranslate"><span class="pre">Orbite</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Astraios.objet_orbite.Two_body_problem"><code class="docutils literal notranslate"><span class="pre">Two_body_problem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-Astraios">Module contents</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -91,20 +105,346 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="astraios-constantes-module">
-<h2>Astraios.constantes module<a class="headerlink" href="#astraios-constantes-module" title="Link to this heading"></a></h2>
+<section id="module-Astraios.constantes">
+<span id="astraios-constantes-module"></span><h2>Astraios.constantes module<a class="headerlink" href="#module-Astraios.constantes" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.constantes.Position_manoeuvre">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.constantes.</span></span><span class="sig-name descname"><span class="pre">Position_manoeuvre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.constantes.Position_manoeuvre" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enumération des positions de manoeuvres possibles.</p>
+<dl class="simple">
+<dt>Les positions de manoeuvres possibles sont:</dt><dd><ul class="simple">
+<li><p>‘apogee’: Manoeuvre effectuée à l’apogée de l’orbite.</p></li>
+<li><p>‘perigee’: Manoeuvre effectuée au périgée de l’orbite.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.constantes.Position_manoeuvre.apogee">
+<span class="sig-name descname"><span class="pre">apogee</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('apogee',)</span></em><a class="headerlink" href="#Astraios.constantes.Position_manoeuvre.apogee" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.constantes.Position_manoeuvre.perigee">
+<span class="sig-name descname"><span class="pre">perigee</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'perigee'</span></em><a class="headerlink" href="#Astraios.constantes.Position_manoeuvre.perigee" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.constantes.Type_manoeuvre">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.constantes.</span></span><span class="sig-name descname"><span class="pre">Type_manoeuvre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.constantes.Type_manoeuvre" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enumération des types de manoeuvres possibles.</p>
+<dl class="simple">
+<dt>Les types de manoeuvres possibles sont:</dt><dd><ul class="simple">
+<li><p>‘prograde’: Manoeuvre dans le sens direct de l’orbite.</p></li>
+<li><p>‘retrograde’: Manoeuvre dans le sens rétrograde de l’orbite.</p></li>
+<li><p>‘radiale’: Manoeuvre radiale, orientée vers ou à partir du centre de la Terre.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.constantes.Type_manoeuvre.prograde">
+<span class="sig-name descname"><span class="pre">prograde</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('prograde',)</span></em><a class="headerlink" href="#Astraios.constantes.Type_manoeuvre.prograde" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.constantes.Type_manoeuvre.radiale">
+<span class="sig-name descname"><span class="pre">radiale</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'radiale'</span></em><a class="headerlink" href="#Astraios.constantes.Type_manoeuvre.radiale" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.constantes.Type_manoeuvre.retrograde">
+<span class="sig-name descname"><span class="pre">retrograde</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('retrograde',)</span></em><a class="headerlink" href="#Astraios.constantes.Type_manoeuvre.retrograde" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="astraios-objet-atmopshere-module">
-<h2>Astraios.objet_Atmopshere module<a class="headerlink" href="#astraios-objet-atmopshere-module" title="Link to this heading"></a></h2>
+<section id="module-Astraios.objet_Atmopshere">
+<span id="astraios-objet-atmopshere-module"></span><h2>Astraios.objet_Atmopshere module<a class="headerlink" href="#module-Astraios.objet_Atmopshere" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.objet_Atmopshere.Atmosphere">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.objet_Atmopshere.</span></span><span class="sig-name descname"><span class="pre">Atmosphere</span></span><a class="headerlink" href="#Astraios.objet_Atmopshere.Atmosphere" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe représentant les propriétés de l’atmosphère terrestre.
+Le modèle établit utilise le modèle de Jacchia-Lineberry pour calculer
+la densite de l’atmosphère en ultra-haute altitude. Cet objet permet donc de
+d’obtenir une densité atmospherique pertinente pour le calcul de la trainée induite
+sur le satellite en orbite basse (LEO).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_Atmopshere.Atmosphere.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><a class="headerlink" href="#Astraios.objet_Atmopshere.Atmosphere.temperature" title="Link to this definition"></a></dt>
+<dd><p>Température de l’atmosphère terrestre (en Kelvin).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_Atmopshere.Atmosphere.densite">
+<span class="sig-name descname"><span class="pre">densite</span></span><a class="headerlink" href="#Astraios.objet_Atmopshere.Atmosphere.densite" title="Link to this definition"></a></dt>
+<dd><p>Liste des densités de l’air à différentes altitudes (en kg/m^3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_Atmopshere.Atmosphere.calculer_densite_air">
+<span class="sig-name descname"><span class="pre">calculer_densite_air</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">altitude</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_Atmopshere.Atmosphere.calculer_densite_air" title="Link to this definition"></a></dt>
+<dd><p>Calcule la densité de l’air à une altitude donnée.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>altitude</strong> (<em>int</em>) – Altitude à laquelle calculer la densité (en mètres).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Densité de l’air à l’altitude donnée (en kg/m^3).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>rho (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_Atmopshere.Atmosphere.calculer_densites">
+<span class="sig-name descname"><span class="pre">calculer_densites</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_Atmopshere.Atmosphere.calculer_densites" title="Link to this definition"></a></dt>
+<dd><p>Calcule les densités de l’air à différentes altitudes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Liste des densités de l’air à différentes altitudes (en kg/m^3).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>densites_air (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_Atmopshere.Atmosphere.calculer_temperature">
+<span class="sig-name descname"><span class="pre">calculer_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">annee</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2023</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mois</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_Atmopshere.Atmosphere.calculer_temperature" title="Link to this definition"></a></dt>
+<dd><p>Calcule la température de l’atmosphère terrestre.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>annee</strong> (<em>int</em>) – Année pour laquelle calculer la température (par défaut 2023).</p></li>
+<li><p><strong>mois</strong> (<em>int</em>) – Mois pour lequel calculer la température, commençant par 1 = janvier jusqu’à 12 = décembre (par défaut 4).</p></li>
+<li><p><strong>jour</strong> (<em>int</em>) – Jour pour lequel calculer la température, commençant par 1 jusqu’à 31 suivant les mois (par défaut 1).</p></li>
+<li><p><strong>heure</strong> (<em>float</em>) – Heure du jour pour laquelle calculer la température, de 0.0 à 23.5 (par défaut 0.0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Température de l’atmosphère terrestre (en Kelvin).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="astraios-objet-spacebody-module">
-<h2>Astraios.objet_SpaceBody module<a class="headerlink" href="#astraios-objet-spacebody-module" title="Link to this heading"></a></h2>
+<section id="module-Astraios.objet_SpaceBody">
+<span id="astraios-objet-spacebody-module"></span><h2>Astraios.objet_SpaceBody module<a class="headerlink" href="#module-Astraios.objet_SpaceBody" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Planet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.objet_SpaceBody.</span></span><span class="sig-name descname"><span class="pre">Planet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'b'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_SpaceBody.Planet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Astraios.objet_SpaceBody.SpaceBody" title="Astraios.objet_SpaceBody.SpaceBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpaceBody</span></code></a></p>
+<p>Représente une planète.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Planet.mass">
+<span class="sig-name descname"><span class="pre">mass</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.Planet.mass" title="Link to this definition"></a></dt>
+<dd><p>La masse de la planète.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Planet.radius">
+<span class="sig-name descname"><span class="pre">radius</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.Planet.radius" title="Link to this definition"></a></dt>
+<dd><p>Le rayon de la planète en mètres.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Planet.color">
+<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.Planet.color" title="Link to this definition"></a></dt>
+<dd><p>La couleur de la planète.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Satellite">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.objet_SpaceBody.</span></span><span class="sig-name descname"><span class="pre">Satellite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cross_surface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_SpaceBody.Satellite" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#Astraios.objet_SpaceBody.SpaceBody" title="Astraios.objet_SpaceBody.SpaceBody"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpaceBody</span></code></a></p>
+<p>Représente un satellite en orbite autour d’un corps céleste.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Satellite.mass">
+<span class="sig-name descname"><span class="pre">mass</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.Satellite.mass" title="Link to this definition"></a></dt>
+<dd><p>La masse du satellite.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Satellite.cx">
+<span class="sig-name descname"><span class="pre">cx</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.Satellite.cx" title="Link to this definition"></a></dt>
+<dd><p>Le coefficient de traînée sans dimension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.Satellite.surface">
+<span class="sig-name descname"><span class="pre">surface</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.Satellite.surface" title="Link to this definition"></a></dt>
+<dd><p>La surface transversale du satellite en mètres carrés.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.SpaceBody">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.objet_SpaceBody.</span></span><span class="sig-name descname"><span class="pre">SpaceBody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_SpaceBody.SpaceBody" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Représente un corps céleste générique.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Astraios.objet_SpaceBody.SpaceBody.mass">
+<span class="sig-name descname"><span class="pre">mass</span></span><a class="headerlink" href="#Astraios.objet_SpaceBody.SpaceBody.mass" title="Link to this definition"></a></dt>
+<dd><p>La masse du corps céleste.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="astraios-objet-orbite-module">
-<h2>Astraios.objet_orbite module<a class="headerlink" href="#astraios-objet-orbite-module" title="Link to this heading"></a></h2>
+<section id="module-Astraios.objet_orbite">
+<span id="astraios-objet-orbite-module"></span><h2>Astraios.objet_orbite module<a class="headerlink" href="#module-Astraios.objet_orbite" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.objet_orbite.Orbite">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.objet_orbite.</span></span><span class="sig-name descname"><span class="pre">Orbite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perigee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apogee</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inclinaison</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temps_simu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">800000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_orbite.Orbite" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Représente la trajectoire orbitale d’un corps céleste.</p>
+<p>Cet objet est nécessaire pour visualiser les trajectoires d’un satellite autour de la Terre,
+il permet également de calculer la trajectoire de désorbitation et d’éstimer le temps de vie
+du satellite. Celui-ci est défini par le temps nécessaire pour que le rayon de l’oribte d’un satellite
+soumis aux frottements atmosphériques atteigne l’altitude de 100km au dessus du niveau de la mer.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_orbite.Orbite.desorbitation">
+<span class="sig-name descname"><span class="pre">desorbitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">satellite</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbite</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmosphere</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_orbit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_propulsion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_orbite.Orbite.desorbitation" title="Link to this definition"></a></dt>
+<dd><p>Calcule et affiche le temps de désorbitation du satellite en orbite.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>satellite</strong> (<a class="reference internal" href="#Astraios.objet_SpaceBody.Satellite" title="Astraios.objet_SpaceBody.Satellite"><em>Satellite</em></a>) – Objet Satellite représentant le satellite en orbite.</p></li>
+<li><p><strong>orbite</strong> (<a class="reference internal" href="#Astraios.objet_orbite.Orbite" title="Astraios.objet_orbite.Orbite"><em>Orbite</em></a>) – Objet Orbite représentant l’orbite du satellite.</p></li>
+<li><p><strong>position</strong> (<a class="reference internal" href="#Astraios.constantes.Position_manoeuvre" title="Astraios.constantes.Position_manoeuvre"><em>Position_manoeuvre</em></a>) – Position initiale de la trajectoire (perigee ou apogee).</p></li>
+<li><p><strong>atmosphere</strong> (<a class="reference internal" href="#Astraios.objet_Atmopshere.Atmosphere" title="Astraios.objet_Atmopshere.Atmosphere"><em>Atmosphere</em></a>) – Objet Atmosphere contenant les données atmosphériques.</p></li>
+<li><p><strong>plot_orbit</strong> (<em>Bool</em>) – Booléen indiquant s’il faut afficher la trajectoire en 3D (par défaut False).</p></li>
+<li><p><strong>force_propulsion</strong> (<em>float</em>) – Force de propulsion pour la désorbitation, en Newton (par défaut 0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Temps écoulé jusqu’à la fin de la désorbitation (en jours).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>temps_final (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_orbite.Orbite.manoeuvre">
+<span class="sig-name descname"><span class="pre">manoeuvre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_orbite.Orbite.manoeuvre" title="Link to this definition"></a></dt>
+<dd><p>Effectue une manoeuvre de changement de vitesse et renvoie une nouvelle orbite.</p>
+<p>Cette méthode calcule les nouveaux paramètres de l’orbite suite à une manoeuvre de changement de vitesse.
+La manoeuvre peut être effectuée à l’apogée ou au périgée.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta_v</strong> (<em>float</em>) – Variation de la vitesse orbitale.</p></li>
+<li><p><strong>direction</strong> (<em>str</em>) – Direction de la manoeuvre, peut être ‘prograde’, ‘rétrograde’ ou ‘radiale’.</p></li>
+<li><p><strong>position</strong> (<em>str</em>) – Position initiale de la trajectoire, peut être ‘périgée’ ou ‘apogée’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nouvelle orbite calculée après la manoeuvre.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>nouvelle_orbite (<a class="reference internal" href="#Astraios.objet_orbite.Orbite" title="Astraios.objet_orbite.Orbite">Orbite</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_orbite.Orbite.plot_orbit">
+<span class="sig-name descname"><span class="pre">plot_orbit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_orbite.Orbite.plot_orbit" title="Link to this definition"></a></dt>
+<dd><p>Trace l’orbite en 3D avec le périgée et l’apogée, l’excentricité et l’inclinaison.</p>
+<p>Si aucune erreur n’est détectée lors de l’initialisation de l’orbite, cette méthode trace
+l’orbite elliptique en trois dimensions avec le périgée et l’apogée. Elle affiche également
+une coupe de la surface terrestre dans le plan de l’orbite.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – Si l’altitude du périgée n’est pas inférieure ou égale à celle de l’apogée.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="Astraios.objet_orbite.Two_body_problem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Astraios.objet_orbite.</span></span><span class="sig-name descname"><span class="pre">Two_body_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corps_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corps_b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rayon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_orbite.Two_body_problem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Représente un problème à deux corps impliquant deux corps célestes.</p>
+<p>Cet objet est particulièrement pertinent pour visualiser l’intéraction entre deux corps
+de masse comparable dans l’espace. Cette intéraction ne prends nullement en compte les interactions
+atmosphériques ou électro-magnétiques entre les corps.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Astraios.objet_orbite.Two_body_problem.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Astraios.objet_orbite.Two_body_problem.show" title="Link to this definition"></a></dt>
+<dd><p>Visualise le problème à deux corps en traçant les corps célestes et leurs orbites en deux dimensions.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<section id="module-Astraios">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-Astraios" title="Link to this heading"></a></h2>
 </section>
 </section>
 
@@ -113,7 +453,6 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="modules.html" class="btn btn-neutral float-left" title="MGA802_projet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="main.html" class="btn btn-neutral float-right" title="main module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

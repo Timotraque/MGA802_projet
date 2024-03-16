@@ -5,4 +5,3 @@ MGA802_projet
    :maxdepth: 4
 
    Astraios
-   main

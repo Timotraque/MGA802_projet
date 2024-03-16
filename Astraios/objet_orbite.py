@@ -9,6 +9,10 @@ from .constantes import *
 class Two_body_problem:
     """
     Représente un problème à deux corps impliquant deux corps célestes.
+
+    Cet objet est particulièrement pertinent pour visualiser l'intéraction entre deux corps
+    de masse comparable dans l'espace. Cette intéraction ne prends nullement en compte les interactions
+    atmosphériques ou électro-magnétiques entre les corps.
     """
 
     def __init__(self, corps_a, corps_b, rayon=0, excent=0):
@@ -16,10 +20,10 @@ class Two_body_problem:
         Initialise le problème à deux corps avec les paramètres donnés.
 
         Args:
-        - corps_a : Objet représentant le premier corps céleste.
-        - corps_b : Objet représentant le deuxième corps céleste.
-        - rayon : Paramètre de rayon pour la visualisation de l'orbite (par défaut 0).
-        - excent : Paramètre d'excentricité pour la visualisation de l'orbite (par défaut 0).
+            corps_a (SpaceBody): Objet représentant le premier corps céleste.
+            corps_b (SpaceBody): Objet représentant le deuxième corps céleste.
+            rayon (float): Paramètre de rayon pour la visualisation de l'orbite (par défaut 0).
+            excent (float): Paramètre d'excentricité pour la visualisation de l'orbite, compris entre 0 et 1 (par défaut 0).
         """
         self.corps_a = corps_a
         self.corps_b = corps_b
@@ -28,7 +32,7 @@ class Two_body_problem:
 
     def show(self):
         """
-        Visualise le problème à deux corps en traçant les corps célestes et leurs orbites.
+        Visualise le problème à deux corps en traçant les corps célestes et leurs orbites en deux dimensions.
         """
         # Position centrée de la planète dans le plan orbital
         position_planete_a = (0, 0)
@@ -55,20 +59,28 @@ class Two_body_problem:
 
 class Orbite:
     """
-    Représente un chemin orbital d'un corps céleste.
+    Représente la trajectoire orbitale d'un corps céleste.
+
+    Cet objet est nécessaire pour visualiser les trajectoires d'un satellite autour de la Terre,
+    il permet également de calculer la trajectoire de désorbitation et d'éstimer le temps de vie
+    du satellite. Celui-ci est défini par le temps nécessaire pour que le rayon de l'oribte d'un satellite
+    soumis aux frottements atmosphériques atteigne l'altitude de 100km au dessus du niveau de la mer.
     """
 
     def __init__(self, perigee, apogee, inclinaison=0, dt=1000, temps_simu=800000):
         """
         Initialise l'Orbite avec les paramètres donnés.
+        Le temps de simulation contenu dans la variable temps_simu doit être suffisamment
+        importante pour permettre la visualisation de la totalité de la trajectoire, traçant ainsi l'orbite.
 
         Args:
-        - perigee : Altitude du périgée en mètres.
-        - apogee : Altitude de l'apogée en mètres.
-        - inclinaison : Inclinaison orbitale en degrés (par défaut 0).
-        - dt : Intervalle de temps pour la simulation en secondes (par défaut 1000).
-        - temps_simu : Durée de la simulation en secondes (par défaut 800000).
+            perigee (float): Altitude du périgée au dessus de la mer (en mètres).
+            apogee (float): Altitude de l'apogée au dessus de la mer (en mètres).
+            inclinaison (float): Inclinaison orbitale en degrés (par défaut 0).
+            dt (int): Intervalle de temps pour la simulation en secondes (par défaut 1000).
+            temps_simu (int): Durée de la simulation en secondes (par défaut 800000).
         """
+
         if perigee <= apogee:
             self.perigee = perigee
             self.apogee = apogee
@@ -82,6 +94,18 @@ class Orbite:
             self.erreur = True
 
     def plot_orbit(self):
+        """
+        Trace l'orbite en 3D avec le périgée et l'apogée, l'excentricité et l'inclinaison.
+
+        Si aucune erreur n'est détectée lors de l'initialisation de l'orbite, cette méthode trace
+        l'orbite elliptique en trois dimensions avec le périgée et l'apogée. Elle affiche également
+        une coupe de la surface terrestre dans le plan de l'orbite.
+
+        Raises:
+            RuntimeError: Si l'altitude du périgée n'est pas inférieure ou égale à celle de l'apogée.
+
+        """
+
         if not self.erreur:
 
             # Calcul de l'excentricité de l'orbite
@@ -144,8 +168,20 @@ class Orbite:
             print("Echec, l'altitude de périgée doit être inférieure à l'apogée")
 
     def manoeuvre(self, delta_v, direction, position):
-        # Cette méthode renvoi un objet de type orbite dont les paramètres sont calculés
-        # à partir de la manoeuvre executee
+        """
+        Effectue une manoeuvre de changement de vitesse et renvoie une nouvelle orbite.
+
+        Cette méthode calcule les nouveaux paramètres de l'orbite suite à une manoeuvre de changement de vitesse.
+        La manoeuvre peut être effectuée à l'apogée ou au périgée.
+
+        Args:
+            delta_v (float): Variation de la vitesse orbitale.
+            direction (str): Direction de la manoeuvre, peut être 'prograde', 'rétrograde' ou 'radiale'.
+            position (str): Position initiale de la trajectoire, peut être 'périgée' ou 'apogée'.
+
+        Returns:
+            nouvelle_orbite (Orbite): Nouvelle orbite calculée après la manoeuvre.
+        """
 
         # Calcul de la vitesse orbitale initiale
         match position:
@@ -190,19 +226,19 @@ class Orbite:
 
     def desorbitation(self, satellite, orbite, position, atmosphere, plot_orbit=False, force_propulsion=0):
         """
-           Calcule et affiche la trajectoire du satellite en orbite.
+        Calcule et affiche le temps de désorbitation du satellite en orbite.
 
-           Args:
-           - satellite : Objet Satellite représentant le satellite en orbite.
-           - orbite : Objet Orbite représentant l'orbite du satellite.
-           - position : Position initiale de la trajectoire (perigee ou apogee).
-           - atmosphere : Objet Atmosphere contenant les données atmosphériques.
-           - plot_orbit : Booléen indiquant s'il faut afficher la trajectoire en 3D (par défaut False).
-           - force_propulsion : Force de propulsion pour la désorbitation (par défaut 0).
+        Args:
+            satellite (Satellite): Objet Satellite représentant le satellite en orbite.
+            orbite (Orbite): Objet Orbite représentant l'orbite du satellite.
+            position (Position_manoeuvre): Position initiale de la trajectoire (perigee ou apogee).
+            atmosphere (Atmosphere): Objet Atmosphere contenant les données atmosphériques.
+            plot_orbit (Bool): Booléen indiquant s'il faut afficher la trajectoire en 3D (par défaut False).
+            force_propulsion (float): Force de propulsion pour la désorbitation, en Newton (par défaut 0).
 
-           Returns:
-           - temps_final : Temps écoulé jusqu'à la fin de la désorbitation (en jours).
-           """
+        Returns:
+            temps_final (float): Temps écoulé jusqu'à la fin de la désorbitation (en jours).
+        """
 
         # Initialisation des variables
         temps = []

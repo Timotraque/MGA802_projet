@@ -18,7 +18,7 @@ author = 'Timothee THOMAS timothee.thomas.1@ens.etsmtl.ca'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = ['sphinx.ext.napoleon']
 
 templates_path = ['sphinx.ext.todo', 'sphinx.ext.viewcode', 'sphinx.ext.autodoc']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
