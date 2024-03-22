@@ -242,7 +242,7 @@ class Orbite:
 
         # Initialisation des variables
         temps = []
-        altitude = []
+        rayon = []
         vitesse = []
         acceleration_radiale = []
         acceleration_tangentielle = []
@@ -251,24 +251,24 @@ class Orbite:
         # Conditions de position initiales
         match position:
             case Position_manoeuvre.perigee:
-                altitude.append(self.perigee + rayon_terre)
+                rayon.append(self.perigee + rayon_terre)
             case Position_manoeuvre.apogee:
-                altitude.append(self.apogee + rayon_terre)
+                rayon.append(self.apogee + rayon_terre)
 
         # Conditions de vitesse initiale
-        vitesse.append(np.sqrt(mu_terre * ((2 / altitude[0]) - 1 / orbite.a)))
+        vitesse.append(np.sqrt(mu_terre * ((2 / rayon[0]) - 1 / orbite.a)))
         temps.append(0)
 
         i = 0
 
         # Tant que le satellite n'atteint pas 100 km
-        while altitude[i] > (100000 + rayon_terre):
+        while rayon[i] > (100000 + rayon_terre):
 
             # Force gravitationnelle et de trainee
-            force_gravite = -mu_terre / (altitude[i] ** 2)
+            force_gravite = -mu_terre / (rayon[i] ** 2)
 
             # Calcul de la force de trainée
-            densite_air = atmosphere.densite[int(altitude[i] - rayon_terre)//1000]
+            densite_air = atmosphere.densite[int(rayon[i] - rayon_terre)//1000]
             force_trainee = 0.5 * densite_air * satellite.surface * np.power(vitesse[i], 2) * satellite.cx
 
             # Calcul des composantes radiales et tangentielle des forces
@@ -285,7 +285,7 @@ class Orbite:
 
             # Mise à jour de la vitesse et de l'altitude
             vitesse.append((vitesse[i] + acceleration_tangentielle[i] * self.dt))
-            altitude.append((2 * mu_terre * orbite.a) / (orbite.a * np.power(vitesse[i], 2) + mu_terre))
+            rayon.append((2 * mu_terre * orbite.a) / (orbite.a * np.power(vitesse[i], 2) + mu_terre))
             temps.append(temps[i] + self.dt)
             i += 1
 
@@ -294,7 +294,7 @@ class Orbite:
         alt = []
         for j in range(len(temps)):
             jour.append(temps[j] / (24 * 3600))
-            alt.append(altitude[j] - rayon_terre)
+            alt.append(rayon[j] - rayon_terre)
         fig = plt.figure()
         ax = fig.add_subplot()
         ax.set_title('Altitude en fonction du temps')
@@ -309,7 +309,7 @@ class Orbite:
         if plot_orbit :
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
-            ax.plot(altitude * np.cos(temps), altitude * np.sin(temps), np.zeros_like(temps), label='Trajectoire du satellite')
+            ax.plot(rayon * np.cos(temps), rayon * np.sin(temps), np.zeros_like(temps), label='Trajectoire du satellite')
             ax.set_xlabel('X')
             ax.set_ylabel('Y')
             ax.set_zlabel('Z')
