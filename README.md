@@ -4,7 +4,7 @@ Astraios [astrajɔs] : bibliothèque Python conçue pour faciliter le calcul d'o
 
 ## Documentation
 Toute la documentation nécessaire à l'utilisation d'Astraios est disponible dans l'onglet `docs` de ce repo GitHub.
-d'ouvrir le fichier `index.html` du dossier dans `docs/_build/html`.
+Il suffit d'ouvrir le fichier `index.html` du dossier dans `docs/_build/html`. Pour mieux comprendre les enjeux liés à la désorbitation et à la modélisation des interactions en haute atmosphère, les ouvrages [1] à [4] sont cruciaux.
 ## Installation 
 
 Vous pouvez installer Astraios en utilisant pip. Assurez-vous d'avoir Python 3.12 d'installé.

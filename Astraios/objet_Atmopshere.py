@@ -23,7 +23,8 @@ class Atmosphere:
 
     def calculer_densite_air(self, altitude):
         """
-        Calcule la densité de l'air à une altitude donnée.
+        Calcule la densité de l'air à une altitude donnée, repose sur un modèle d'atmosphère jusqu'à 100km et un modèle
+        au delà de 100km d'altitude (pertinent jusqu'à environ 1000km). Voir bibliographie pour plus d'informations.
 
         Args:
             altitude (int): Altitude à laquelle calculer la densité (en mètres).
